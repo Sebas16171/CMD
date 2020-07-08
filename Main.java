@@ -2,9 +2,20 @@ import java.util.*;
 
 public class Main {
 
-    
+    private static String prompt = "";
+    public static String[] Salida_Extra = new String[20];
+    public static ArrayList<Variable> Variables = new ArrayList<Variable>();
+
     private static void Agrega_Prompt() {
-        System.out.print("" + System.getProperty("user.dir") + "> ");
+        if (prompt.equals("")){
+            System.out.print("" + System.getProperty("user.dir") + "> ");
+        } else {
+            System.out.print(prompt + "> ");
+        }
+    }
+
+    public static void Cambiar_Prompt(String Nuevo_Prompt) {
+        prompt = Nuevo_Prompt.trim();
     }
     
     public static void main(String[] args) throws InterruptedException {
@@ -13,7 +24,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String comando = "";
         
-        System.out.println("Un saludito para toda la raza que la sigue cotorreando\n");
+        System.out.println("\n\nUn saludito para toda la raza que la sigue cotorreando ");
+        System.out.println("======Autor: Sebastian Cervera N. - Version: 0.1======\n");
         
         int continua = 1;
 
@@ -37,6 +49,15 @@ public class Main {
                     case 1:
                         System.out.println("Error: Comando '" + Palabras[0] + "' no encontrado");
                         break;
+                    case 2:
+                        System.out.println("Error: " + Salida_Extra[0] + " parametro(s) esperado(s), " + Salida_Extra[1] + " recibido(s)");
+                        break;
+                    case 3:
+                        System.out.println("Error: El parametro debe ser de tipo " + Salida_Extra[0]);
+                        break;
+                    case 4:
+                        System.out.println("Error: La variable '" + Parametros.get(0) + "' ya fue registrada");
+                        break;
                 
                     default:
                         break;
@@ -45,8 +66,9 @@ public class Main {
 
         }
 
+        scanner.close();
         System.out.println("No me quiero ir Sr. Stark. :'(");
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
     
 }
