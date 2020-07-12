@@ -1,13 +1,17 @@
 public class Variable {
-    private static String Nombre;
-    private static float Valor;
+    private String Nombre;
+    private float Valor;
 
     public String GetNombre(){
         return Nombre;
     }
 
-    public static float GetValor(){
+    public float GetValor(){
         return Valor;
+    }
+
+    public void SetValor(float iValor){
+        Valor = iValor;
     }
 
     public Variable(String iNombre, float iValor){

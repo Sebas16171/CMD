@@ -4,6 +4,7 @@ public class Main {
 
     private static String prompt = "";
     public static String[] Salida_Extra = new String[20];
+    
     public static ArrayList<Variable> Variables = new ArrayList<Variable>();
 
     private static void Agrega_Prompt() {
@@ -19,13 +20,12 @@ public class Main {
     }
     
     public static void main(String[] args) throws InterruptedException {
-        //new Ventana();
         
         Scanner scanner = new Scanner(System.in);
         String comando = "";
         
         System.out.println("\n\nUn saludito para toda la raza que la sigue cotorreando ");
-        System.out.println("======Autor: Sebastian Cervera N. - Version: 0.1======\n");
+        System.out.println("======Autor: Sebastian Cervera N. - Version: 2.0======\n");
         
         int continua = 1;
 
@@ -42,7 +42,6 @@ public class Main {
                 }
     
                 Comando input = new Comando(Palabras[0], Parametros);
-    
                 continua = input.ProcesarComando();
     
                 switch (continua) {
@@ -58,10 +57,22 @@ public class Main {
                     case 4:
                         System.out.println("Error: La variable '" + Parametros.get(0) + "' ya fue registrada");
                         break;
+                    case 5:
+                        System.out.println("Error: El nombre de una variable no puede iniciar por un numero");
+                        break;
+                    case 6:
+                        System.out.println("Aviso: Ninguna variable registrada");
+                        break;
+                    case 7:
+                        System.out.println("Error: Variable '" + Salida_Extra[0] + "' no encontrada");
+                        break;
                 
                     default:
                         break;
-                }         
+                }
+                if (Palabras[0].trim().equals("lstVar")){
+                    System.out.print(Salida_Extra[0]);
+                }   
             }
 
         }
