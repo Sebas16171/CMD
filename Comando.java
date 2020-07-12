@@ -136,22 +136,15 @@ public class Comando {
                     }
 
                     if (!Character.isDigit(Parametros.get(1).charAt(0))) {
-
                         for (final Variable checkingVar2 : Main.Variables) {
-
-                            System.out.println("Comparo " + checkingVar2.GetNombre() + " con " + Parametros.get(1));
-
                             if (Parametros.get(1).equals(checkingVar2.GetNombre())) {
-                                System.out.println("Encontrado");
                                 WorkingVar2 = checkingVar2;
                                 break;
                             }
                         }
                         if (WorkingVar2 != null) {
                             nwValor = WorkingVar2.GetValor();
-
                         } else{
-
                             Main.Salida_Extra[0] = "numerico o variable";
                             return 3;
 
@@ -161,6 +154,68 @@ public class Comando {
                     } 
                     WorkingVar.SetValor(nwValor);
                 }
+            break;
+
+            case "operacion":
+
+                if (Parametros.size() == 3) {
+
+                    ArrayList<Float> valores = new ArrayList<Float>();
+                    float resultado = 0;
+
+                    for (int i = 0; i < Parametros.size(); i++) {
+                        if (i % 2 == 0) {
+                            if (Character.isDigit(Parametros.get(i).charAt(0))) {
+                                valores.add(Float.valueOf(Parametros.get(i)));
+                            } else {
+                                for (Variable checkingVar : Main.Variables) {
+                                    if (checkingVar.GetNombre().equals(Parametros.get(i))) {
+                                        valores.add(checkingVar.GetValor());
+                                        break;
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+
+                    for (Float float1 : valores) {
+                        System.out.println(float1);
+                    }
+
+
+                    switch (Parametros.get(1)) {
+                        case "+":
+                            resultado = valores.get(0) + valores.get(1);
+                            System.out.println(resultado);
+                        break;
+                        case "-":
+                            resultado = valores.get(0) - valores.get(1);
+                            System.out.println(resultado);
+                        break;
+                        case "*":
+                            resultado = valores.get(0) * valores.get(1);
+                            System.out.println(resultado);
+                        break;
+                        case "/":
+                            resultado = valores.get(0) / valores.get(1);
+                            System.out.println(resultado);
+                        break;
+                        case "%":
+                            resultado = valores.get(0) % valores.get(1);
+                            System.out.println(resultado);
+                        break;
+                    
+                        default:
+                            break;
+                    }
+                } else {
+                    Main.Salida_Extra[0] = "3";
+                    Main.Salida_Extra[1] = Parametros.size() + "";
+                    return 2;
+                }
+
             break;
 
             default:
