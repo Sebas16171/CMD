@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Comando {
     private final String Valor;
+    private float resultado = 0;
     ArrayList<String> Parametros = new ArrayList<String>();
 
     public Comando(final String iValor, final ArrayList<String> iParametros) {
@@ -156,15 +157,27 @@ public class Comando {
                 }
             break;
 
-            case "operacion":
+            /*case "operacion":
 
                 if (Parametros.size() == 3) {
 
                     ArrayList<Float> valores = new ArrayList<Float>();
                     float resultado = 0;
 
+                    Variable workingVariable = null;
+
+                    if (!Character.isDigit(Parametros.get(0).charAt(0))) {
+                        for (Variable checkingVar : Main.Variables) {
+                            if (checkingVar.GetNombre().equals(Parametros.get(0))) {
+                                workingVariable = checkingVar;
+                                break;
+                            }
+
+                        }
+                    }
+
                     for (int i = 0; i < Parametros.size(); i++) {
-                        if (i % 2 == 0) {
+                        if (i == 1 || i % 3 == 0) {
                             if (Character.isDigit(Parametros.get(i).charAt(0))) {
                                 valores.add(Float.valueOf(Parametros.get(i)));
                             } else {
@@ -183,8 +196,7 @@ public class Comando {
                     for (Float float1 : valores) {
                         System.out.println(float1);
                     }
-
-
+                    
                     switch (Parametros.get(1)) {
                         case "+":
                             resultado = valores.get(0) + valores.get(1);
@@ -216,12 +228,254 @@ public class Comando {
                     return 2;
                 }
 
+            break;*/
+            
+            case "suma":
+                try {
+                    resultado = Float.valueOf(Parametros.get(0));
+                } catch (Exception e) {
+                    boolean encontrado = false;
+                    for (Variable CheckingVar : Main.Variables) {
+                        if (Parametros.get(0).equals(CheckingVar.GetNombre())) {
+                            resultado += CheckingVar.GetValor();
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) {
+                        Main.Salida_Extra[0] = "numerico o variable";
+                        return 3;
+                    }
+                }
+
+                for (String parametro : Parametros.subList(1, Parametros.size())) {
+                    if (Character.isDigit(parametro.charAt(0))){
+                        resultado += Float.valueOf(parametro) ;
+                    } else {
+                        boolean encontrado = false;
+                        for (Variable CheckingVar : Main.Variables) {
+                            if (parametro.equals(CheckingVar.GetNombre())) {
+                                resultado += CheckingVar.GetValor();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (!encontrado) {
+                            Main.Salida_Extra[0] = "numerico o variable";
+                            return 3;
+                        }
+                    }
+                }
+
+                System.out.println(resultado);
+            break;
+
+            case "resta":
+                    try {
+                    resultado = Float.valueOf(Parametros.get(0));
+                } catch (Exception e) {
+                    boolean encontrado = false;
+                    for (Variable CheckingVar : Main.Variables) {
+                        if (Parametros.get(0).equals(CheckingVar.GetNombre())) {
+                            resultado += CheckingVar.GetValor();
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) {
+                        Main.Salida_Extra[0] = "numerico o variable";
+                        return 3;
+                    }
+                }
+
+                for (String parametro : Parametros.subList(1, Parametros.size())) {
+                    if (Character.isDigit(parametro.charAt(0))) {
+                        resultado -= Float.valueOf(parametro);
+                    } else {
+                        boolean encontrado = false;
+                        for (Variable CheckingVar : Main.Variables) {
+                            if (parametro.equals(CheckingVar.GetNombre())) {
+                                resultado -= CheckingVar.GetValor();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (!encontrado) {
+                            Main.Salida_Extra[0] = "numerico o variable";
+                            return 3;
+                        }
+                    }
+                }
+
+                System.out.println(resultado);
+            break;
+
+            case "multiplicacion":
+                    try {
+                    resultado = Float.valueOf(Parametros.get(0));
+                } catch (Exception e) {
+                    boolean encontrado = false;
+                    for (Variable CheckingVar : Main.Variables) {
+                        if (Parametros.get(0).equals(CheckingVar.GetNombre())) {
+                            resultado += CheckingVar.GetValor();
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) {
+                        Main.Salida_Extra[0] = "numerico o variable";
+                        return 3;
+                    }
+                }
+
+                for (String parametro : Parametros.subList(1, Parametros.size())) {
+                    if (Character.isDigit(parametro.charAt(0))) {
+                        resultado = resultado * Float.valueOf(parametro);
+                    } else {
+                        boolean encontrado = false;
+                        for (Variable CheckingVar : Main.Variables) {
+                            if (parametro.equals(CheckingVar.GetNombre())) {
+                                resultado = resultado * CheckingVar.GetValor();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (!encontrado) {
+                            Main.Salida_Extra[0] = "numerico o variable";
+                            return 3;
+                        }
+                    }
+                }
+
+                System.out.println(resultado);
+            break;
+
+            case "division":
+                    try {
+                    resultado = Float.valueOf(Parametros.get(0));
+                } catch (Exception e) {
+                    boolean encontrado = false;
+                    for (Variable CheckingVar : Main.Variables) {
+                        if (Parametros.get(0).equals(CheckingVar.GetNombre())) {
+                            resultado += CheckingVar.GetValor();
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) {
+                        Main.Salida_Extra[0] = "numerico o variable";
+                        return 3;
+                    }
+                }
+
+                for (String parametro : Parametros.subList(1, Parametros.size())) {
+                    if (Character.isDigit(parametro.charAt(0))) {
+                        resultado = resultado / Float.valueOf(parametro);
+                    } else {
+                        boolean encontrado = false;
+                        for (Variable CheckingVar : Main.Variables) {
+                            if (parametro.equals(CheckingVar.GetNombre())) {
+                                resultado = resultado / CheckingVar.GetValor();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (!encontrado) {
+                            Main.Salida_Extra[0] = "numerico o variable";
+                            return 3;
+                        }
+                    }
+                }
+
+                System.out.println(resultado);
+            break;
+
+            case "modulo":
+                    try {
+                    resultado = Float.valueOf(Parametros.get(0));
+                } catch (Exception e) {
+                    boolean encontrado = false;
+                    for (Variable CheckingVar : Main.Variables) {
+                        if (Parametros.get(0).equals(CheckingVar.GetNombre())) {
+                            resultado += CheckingVar.GetValor();
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if (!encontrado) {
+                        Main.Salida_Extra[0] = "numerico o variable";
+                        return 3;
+                    }
+                }
+
+                for (String parametro : Parametros.subList(1, Parametros.size())) {
+                    if (Character.isDigit(parametro.charAt(0))) {
+                        resultado = resultado % Float.valueOf(parametro);
+                    } else {
+                        boolean encontrado = false;
+                        for (Variable CheckingVar : Main.Variables) {
+                            if (parametro.equals(CheckingVar.GetNombre())) {
+                                resultado = resultado % CheckingVar.GetValor();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+                        if (!encontrado) {
+                            Main.Salida_Extra[0] = "numerico o variable";
+                            return 3;
+                        }
+                    }
+                }
+
+                System.out.println(resultado);
+            break;
+
+            case "aiuda":
+
+                if (Parametros.size() > 0) {
+                    Main.Salida_Extra[0] = "0";
+                    Main.Salida_Extra[1] = Parametros.size() + "";
+                    return 2;
+                }
+                
+                System.out.println("\nalv\t\t\t\tSale del programa");
+                System.out.println("NwP [prompt]\t\t\tCambia el prompt");
+                System.out.println("Var [Nombre] [Valor]\t\tCrea una variable");
+                System.out.println("lstVar [Nombre]\t\t\tMuestra una o todas las variables");
+                System.out.println("cng [Nombre] [Valor]\t\tCambia el valor de una variable");
+                //System.out.println("operacion\t\t");
+                System.out.println("suma [{Valores}]\t\tSuma dos o mas numeros");
+                System.out.println("resta [{Valores}]\t\tResta dos o mas numeros");
+                System.out.println("multiplicacion [{Valores}]\tMultiplica dos o mas numeros");
+                System.out.println("division [{Valores}]\t\tDivide dos o mas numeros");
+                System.out.println("modulo [{Valores}]\t\tResiduo de la division entre dos o mas numeros");
+                System.out.println("aiuda\t\t\t\tMuestra este mensaje de ayuda\n");
             break;
 
             default:
-                return 1;
+                if (Valor.endsWith("++")) {
+                    String nombre_variable = Valor.substring(0, Valor.length() - 2);
+                    for (Variable WorkingVar : Main.Variables) {
+                        if (nombre_variable.equals(WorkingVar.GetNombre())) {
+                            WorkingVar.SetValor(WorkingVar.GetValor() + 1);
+                        }
+                    }
+                    return 0;
+                } else if(Valor.endsWith("--")){
+                    String nombre_variable = Valor.substring(0, Valor.length() - 2);
+                    for (Variable WorkingVar : Main.Variables) {
+                        if (nombre_variable.equals(WorkingVar.GetNombre())) {
+                            WorkingVar.SetValor(WorkingVar.GetValor() - 1);
+                        }
+                    }
+                    return 0;
+                } else {
+                    return 1;
+                }
         }
         return 0;
     }
 
 }
+
+
