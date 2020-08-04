@@ -351,7 +351,8 @@ public class Comando {
             break;
 
             case "division":
-                    try {
+                boolean error = false;
+                try {
                     resultado = Float.valueOf(Parametros.get(0));
                 } catch (Exception e) {
                     boolean encontrado = false;
@@ -370,11 +371,17 @@ public class Comando {
 
                 for (String parametro : Parametros.subList(1, Parametros.size())) {
                     if (Character.isDigit(parametro.charAt(0))) {
+                        if (Float.valueOf(parametro) == 0) {
+                            error = true;
+                        }
                         resultado = resultado / Float.valueOf(parametro);
                     } else {
                         boolean encontrado = false;
                         for (Variable CheckingVar : Main.Variables) {
                             if (parametro.equals(CheckingVar.GetNombre())) {
+                                if (Float.valueOf(CheckingVar.GetValor()) == 0) {
+                                    error = true;
+                                }
                                 resultado = resultado / CheckingVar.GetValor();
                                 encontrado = true;
                                 break;
@@ -386,11 +393,16 @@ public class Comando {
                         }
                     }
                 }
+                if (error) {
+                    System.out.println("No se puede dividir entre 0");
+                } else {
+                    System.out.println(resultado);
 
-                System.out.println(resultado);
+                }
             break;
 
             case "modulo":
+            boolean error2 = false;
                     try {
                     resultado = Float.valueOf(Parametros.get(0));
                 } catch (Exception e) {
@@ -410,11 +422,17 @@ public class Comando {
 
                 for (String parametro : Parametros.subList(1, Parametros.size())) {
                     if (Character.isDigit(parametro.charAt(0))) {
+                        if (Float.valueOf(parametro) == 0) {
+                            error2 = true;
+                        }
                         resultado = resultado % Float.valueOf(parametro);
                     } else {
                         boolean encontrado = false;
                         for (Variable CheckingVar : Main.Variables) {
                             if (parametro.equals(CheckingVar.GetNombre())) {
+                                if (CheckingVar.GetValor() == 0) {
+                                    error2 = true;
+                                }
                                 resultado = resultado % CheckingVar.GetValor();
                                 encontrado = true;
                                 break;
@@ -426,14 +444,18 @@ public class Comando {
                         }
                     }
                 }
+                if (error2) {
+                    System.out.println("No se puede dividir entre 0");
+                } else {
+                    System.out.println(resultado);
 
-                System.out.println(resultado);
+                }
             break;
 
             case "aiuda":
 
-                if (Parametros.size() > 0) {
-                    Main.Salida_Extra[0] = "0";
+                if (Parametros.size() > 1) {
+                    Main.Salida_Extra[0] = "1";
                     Main.Salida_Extra[1] = Parametros.size() + "";
                     return 2;
                 }
@@ -443,7 +465,6 @@ public class Comando {
                 System.out.println("Var [Nombre] [Valor]\t\tCrea una variable");
                 System.out.println("lstVar [Nombre]\t\t\tMuestra una o todas las variables");
                 System.out.println("cng [Nombre] [Valor]\t\tCambia el valor de una variable");
-                //System.out.println("operacion\t\t");
                 System.out.println("suma [{Valores}]\t\tSuma dos o mas numeros");
                 System.out.println("resta [{Valores}]\t\tResta dos o mas numeros");
                 System.out.println("multiplicacion [{Valores}]\tMultiplica dos o mas numeros");
@@ -479,3 +500,4 @@ public class Comando {
 }
 
 
+ 

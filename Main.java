@@ -25,7 +25,7 @@ public class Main {
         String comando = "";
         
         System.out.println("\n\nUn saludito para toda la raza que la sigue cotorreando ");
-        System.out.println("======Autor: Sebastian Cervera N. - Version: 3.0======\n");
+        System.out.println("======Autor: Sebastian Cervera N. - Version: 4.0======\n");
         
         int continua = 1;
 
